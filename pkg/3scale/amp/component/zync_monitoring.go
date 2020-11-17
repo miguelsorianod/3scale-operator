@@ -86,7 +86,7 @@ func ZyncPrometheusRules(ns string) *monitoringv1.PrometheusRule {
 						{
 							Alert: "ThreescaleZyncJobDown",
 							Annotations: map[string]string{
-								"sop_url":     ThreescalePodNotReadyURL,
+								"sop_url":     ThreescalePrometheusJobDownURL,
 								"summary":     "Job {{ $labels.job }} on {{ $labels.namespace }} is DOWN",
 								"description": "Job {{ $labels.job }} on {{ $labels.namespace }} is DOWN",
 							},
@@ -133,7 +133,7 @@ func ZyncQuePrometheusRules(ns string) *monitoringv1.PrometheusRule {
 						{
 							Alert: "ThreescaleZyncQueJobDown",
 							Annotations: map[string]string{
-								"sop_url":     ThreescalePodNotReadyURL,
+								"sop_url":     ThreescalePrometheusJobDownURL,
 								"summary":     "Job {{ $labels.job }} on {{ $labels.namespace }} is DOWN",
 								"description": "Job {{ $labels.job }} on {{ $labels.namespace }} is DOWN",
 							},

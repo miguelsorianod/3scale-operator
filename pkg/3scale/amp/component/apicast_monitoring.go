@@ -106,7 +106,7 @@ func ApicastPrometheusRules(ns string) *monitoringv1.PrometheusRule {
 						{
 							Alert: "ThreescaleApicastJobDown",
 							Annotations: map[string]string{
-								"sop_url":     ThreescalePodNotReadyURL,
+								"sop_url":     ThreescalePrometheusJobDownURL,
 								"summary":     "Job {{ $labels.job }} on {{ $labels.namespace }} is DOWN",
 								"description": "Job {{ $labels.job }} on {{ $labels.namespace }} is DOWN",
 							},

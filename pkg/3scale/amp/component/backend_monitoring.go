@@ -99,7 +99,7 @@ func BackendWorkerPrometheusRules(ns string) *monitoringv1.PrometheusRule {
 						{
 							Alert: "ThreescaleBackendWorkerJobDown",
 							Annotations: map[string]string{
-								"sop_url":     ThreescalePodNotReadyURL,
+								"sop_url":     ThreescalePrometheusJobDownURL,
 								"summary":     "Job {{ $labels.job }} on {{ $labels.namespace }} is DOWN",
 								"description": "Job {{ $labels.job }} on {{ $labels.namespace }} is DOWN",
 							},
@@ -146,7 +146,7 @@ func BackendListenerPrometheusRules(ns string) *monitoringv1.PrometheusRule {
 						{
 							Alert: "ThreescaleBackendListenerJobDown",
 							Annotations: map[string]string{
-								"sop_url":     ThreescalePodNotReadyURL,
+								"sop_url":     ThreescalePrometheusJobDownURL,
 								"summary":     "Job {{ $labels.job }} on {{ $labels.namespace }} is DOWN",
 								"description": "Job {{ $labels.job }} on {{ $labels.namespace }} is DOWN",
 							},
