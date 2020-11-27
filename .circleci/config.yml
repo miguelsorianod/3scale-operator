@@ -433,7 +433,6 @@ jobs:
     steps:
       - checkout
       - install-openshift
-      - create-secrets
       - create-redhat-registry-io-secret
       - build-nightly-amp:
           components_imagestream_tag_name: << parameters.components_imagestream_tag_name >>
