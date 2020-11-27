@@ -422,6 +422,25 @@ jobs:
       - deploy-3scale-eval-from-template
       - oc-status
 
+  build-push-3scale-nightly-images2:
+    parameters:
+      components_imagestream_tag_name:
+        type: string
+    machine:
+      image: ubuntu-1604:202007-01
+      docker_layer_caching: true
+    resource_class: large
+    steps:
+      - checkout
+      - install-openshift
+      - create-secrets
+      - create-redhat-registry-io-secret
+      - build-nightly-amp:
+          components_imagestream_tag_name: << parameters.components_imagestream_tag_name >>
+      - oc-observe
+      - deploy-3scale-eval-from-template-imagestreamsless
+      - oc-status
+
   build-push-3scale-nightly-images:
     parameters:
       components_imagestream_tag_name:
@@ -575,6 +594,8 @@ workflows:
       - deploy_templates:
           requires:
             - generator
+      - build-push-3scale-nightly-images2:
+          components_imagestream_tag_name: "master"
   nightly:
     jobs:
       - build-push-3scale-nightly-images:
