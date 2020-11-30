@@ -17,6 +17,18 @@ nightly-trigger: &nightly-trigger
         cron: "0 0 * * *"
         <<: *only-master-filter
 
+only-non-forked-branches-filter: &only-non-forked-branches-filter
+  filters:
+    branches:
+      # Forked pull requests have CIRCLE_BRANCH set to pull/XXX
+      ignore: /pull\/[0-9]+/
+
+only-forked-branches-filter: &only-forked-branches-filter
+  filters:
+    branches:
+      # Forked pull requests have CIRCLE_BRANCH set to pull/XXX
+      only: /pull\/[0-9]+/
+
 commands:
   attach-workspace:
     steps:
@@ -564,6 +576,12 @@ workflows:
       - run-operator-e2e-test:
           requires:
             - install-operator
+          <<: *only-non-forked-branches-filter
+      - run-operator-e2e-test:
+          requires:
+            - install-operator
+          <<: *only-forked-branches-filter
+          type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
       - unit-tests-coverage:
           requires:
             - run-unit-tests
